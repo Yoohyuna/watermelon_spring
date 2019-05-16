@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="album">
+
+	<select id="printAlbum"  resultType="albumDTO">
+	select a_imgDir, albumName, albumID from Album		
+	</select>
+	
+	
+	<select id="printSingleAlbum" parameterType="Integer" resultType="albumDTO">	 
+	select albumName, a_content, a_imgDir, albumID from Album where albumID=#{albumID}
+	</select>
+	
+	
+	<select id="albumList" parameterType="Integer" resultType="albumDTO">
+	select t1.t_ID, t1.artistID, t1.genreID, t1.musicName, t1.time, t1.albumID, t2.genreName from Track_info t1, Genre t2 
+	where t1.genreID=t2.genreID and albumID=#{albumID}
+	
+	</select>
+	
+	<select id="printCharts" resultType="albumDTO">
+	select t1.artistName, t3.musicName, t2.a_imgDir from Artist t1, Album t2, Track_info t3
+	where t3.artistID=t1.artistID and t3.artistID=t2.artistID order by t3.musicName desc
+				
+	</select>
+			
+			
+			
+			
+			
+			
+			
+</mapper>
